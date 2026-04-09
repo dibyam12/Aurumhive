@@ -3,6 +3,7 @@ import type { FormEvent, ChangeEvent } from "react";
 import SectionWrapper from "./SectionWrapper";
 import { careersContent, openJobs } from "../data";
 import { toast } from '../stores/toastStore';
+import ReCAPTCHA from "react-google-recaptcha";
 
 interface CareersApplicationFormProps {
     initialRole: string | null;
@@ -44,6 +45,8 @@ export default function CareersApplicationForm({
     const [errors, setErrors] = useState<CareersFormErrors>({});
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submissionStatus, setSubmissionStatus] = useState<'idle' | 'success' | 'error'>('idle');
+    const [captchaToken, setCaptchaToken] = useState<string | null>(null);
+    const recaptchaKey = "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"; // Google's public test key
 
     useEffect(() => {
         if (initialRole) {
@@ -130,6 +133,11 @@ export default function CareersApplicationForm({
         e.preventDefault();
 
         if (!validate()) {
+            return;
+        }
+
+        if (!captchaToken) {
+            toast.error('Please verify that you are not a robot.');
             return;
         }
 
@@ -265,6 +273,13 @@ export default function CareersApplicationForm({
                             </label>
                         </div>
                         {errors.consent && <p className="text-red-500 text-xs mt-1">{errors.consent}</p>}
+                    </div>
+
+                    <div className="mb-2">
+                        <ReCAPTCHA
+                            sitekey={recaptchaKey}
+                            onChange={(token) => setCaptchaToken(token)}
+                        />
                     </div>
 
                     <div className="flex items-center gap-4">

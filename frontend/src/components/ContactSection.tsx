@@ -2,6 +2,7 @@ import { useState } from 'react';
 import type { FormEvent, ChangeEvent } from 'react';
 import SectionWrapper from './SectionWrapper';
 import { toast } from '../stores/toastStore';
+import ReCAPTCHA from "react-google-recaptcha";
 
 import { useContentStore } from '../stores/contentStore';
 import { contactCopy as staticContact } from '../data';
@@ -36,6 +37,8 @@ export default function ContactSection() {
     const [errors, setErrors] = useState<ContactFormErrors>({});
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submissionStatus, setSubmissionStatus] = useState<'idle' | 'success' | 'error'>('idle');
+    const [captchaToken, setCaptchaToken] = useState<string | null>(null);
+    const recaptchaKey = "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"; // Google's public test key
 
     const validate = (): boolean => {
         const newErrors: ContactFormErrors = {};
@@ -87,6 +90,11 @@ export default function ContactSection() {
             return;
         }
 
+        if (!captchaToken) {
+            toast.error('Please verify that you are not a robot.');
+            return;
+        }
+
         setIsSubmitting(true);
         setSubmissionStatus('idle');
 
@@ -95,7 +103,7 @@ export default function ContactSection() {
             const response = await fetch(`${API_URL}/api/contact`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(formData)
+                body: JSON.stringify({ ...formData, recaptcha: captchaToken })
             });
 
             if (response.ok) {
@@ -178,6 +186,13 @@ export default function ContactSection() {
                                 className={`w-full p-4 rounded-lg border ${errors.message ? 'border-red-500' : 'border-border'} text-base font-primary resize-none outline-none bg-off-white focus:border-primary focus:ring-1 focus:ring-primary transition-colors`}
                             />
                             {errors.message && <p className="text-red-500 text-sm mt-1">{errors.message}</p>}
+                        </div>
+
+                        <div className="mb-2">
+                            <ReCAPTCHA
+                                sitekey={recaptchaKey}
+                                onChange={(token) => setCaptchaToken(token)}
+                            />
                         </div>
 
                         <div className="flex items-center gap-4">

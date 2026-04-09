@@ -1,16 +1,13 @@
 import { useRef, useState, useEffect } from 'react';
 import { useScroll, useSpring, useTransform, useVelocity } from 'framer-motion';
 import { useContentStore } from '../stores/contentStore';
-import { footerLinks as staticFooterLinks, siteMeta as staticSiteMeta, contactCopy as staticContact } from '../data';
-import ThemeToggle from './ThemeToggle';
+import { footerLinks as staticFooterLinks, siteMeta as staticSiteMeta } from '../data';
 
 export default function Footer() {
     const { content } = useContentStore();
     const siteMeta = content.siteMeta || staticSiteMeta;
     const footerLinks = content.footerLinks || staticFooterLinks;
-    const contactCopy = content.contactCopy || staticContact;
 
-    const currentYear = new Date().getFullYear();
     const containerRef = useRef<HTMLDivElement>(null);
     const windowWidth = useWindowWidth();
 
@@ -115,7 +112,7 @@ Z
                     .
                 </p>
                 <div className="flex justify-center gap-6">
-                    {footerLinks.map(link => (
+                    {footerLinks.map((link: any) => (
                         <a
                             key={link.label}
                             href={link.href}

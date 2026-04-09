@@ -20,7 +20,7 @@ export default function Navbar() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     // Get navigation from store
-    const { navLinks, fetchNavigation, isLoading } = useNavigationStore();
+    const { navLinks, fetchNavigation } = useNavigationStore();
     const { content } = useContentStore();
     const siteMeta = content.siteMeta || { name: 'AURUMHIVE' };
 

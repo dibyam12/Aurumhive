@@ -1,6 +1,5 @@
 import { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useTransform, useMotionValueEvent } from 'framer-motion';
-import SimpleNavbar from './SimpleNavbar';
 import { useContentStore } from '../stores/contentStore';
 import Skeleton from './ui/Skeleton';
 

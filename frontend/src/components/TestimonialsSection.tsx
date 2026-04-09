@@ -14,7 +14,7 @@ export default function TestimonialsSection() {
                     What Clients Say
                 </h2>
                 <div className="grid md:grid-cols-2 gap-6">
-                    {testimonials.map((t) => (
+                    {testimonials.map((t: any) => (
                         <div
                             key={t.name}
                             className="rounded-2xl bg-card-gradient border border-border p-6 shadow-card"

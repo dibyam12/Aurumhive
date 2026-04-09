@@ -12,7 +12,7 @@ export default function TechStackSection() {
                     Tech We Love
                 </h2>
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-                    {techStackGroups.map((group) => (
+                    {techStackGroups.map((group: any) => (
                         <div
                             key={group.label}
                             className="rounded-2xl bg-card-gradient border border-border p-5 shadow-card"
@@ -21,7 +21,7 @@ export default function TechStackSection() {
                                 {group.label}
                             </h3>
                             <ul className="text-secondary text-sm space-y-1">
-                                {group.items.map((item) => (
+                                {group.items.map((item: any) => (
                                     <li key={item}>• {item}</li>
                                 ))}
                             </ul>

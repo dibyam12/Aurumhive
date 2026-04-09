@@ -2,8 +2,6 @@ import { useRef, useState, useEffect } from 'react';
 import { motion, useInView, useScroll, useMotionValueEvent, useMotionValue, useTransform, animate } from 'framer-motion';
 import { useContentStore } from '../stores/contentStore';
 import { aboutSection } from "../data";
-import ScrollFloat from './ScrollFloat';
-
 export default function AboutSection() {
     const ref = useRef(null);
     const isInView = useInView(ref, { amount: 0.2 });

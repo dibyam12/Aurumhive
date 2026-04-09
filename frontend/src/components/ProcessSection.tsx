@@ -12,7 +12,7 @@ export default function ProcessSection() {
                     How We Work
                 </h2>
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-                    {processSteps.map((step, index) => (
+                    {processSteps.map((step: any, index: number) => (
                         <div
                             key={step.title}
                             className="rounded-2xl bg-card-gradient border border-border p-5 shadow-card flex flex-col gap-2"

@@ -1,5 +1,3 @@
-import { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
 import { useContentStore } from '../stores/contentStore';
 import { services as staticServices } from '../data';
 import SectionWrapper from './SectionWrapper';
@@ -7,8 +5,6 @@ import SectionWrapper from './SectionWrapper';
 export default function FeatureSection() {
   const { content } = useContentStore();
   const services = content.services || staticServices;
-
-  const containerRef = useRef(null);
   return (
     <SectionWrapper className="w-full py-20">
       <div className="max-w-6xl mx-auto px-6">
@@ -19,7 +15,7 @@ export default function FeatureSection() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {services.map((service) => (
+          {services.map((service: any) => (
             <div
               key={service.id}
               className="rounded-2xl bg-card-gradient border border-border p-8 shadow-card flex flex-col justify-between hover:shadow-lg transition-all duration-300"
@@ -32,7 +28,7 @@ export default function FeatureSection() {
                   {service.description}
                 </p>
                 <ul className="text-secondary text-sm leading-relaxed list-disc list-inside space-y-2 my-6">
-                  {service.bullets.map((item) => (
+                  {service.bullets.map((item: any) => (
                     <li key={item}>{item}</li>
                   ))}
                 </ul>

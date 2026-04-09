@@ -1,0 +1,253 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+@import "tailwindcss";
+
+@plugin "tailwindcss-animate";
+
+/* Define the theme using native CSS variables for Tailwind v4 */
+:root {
+  color-scheme: light;
+  /* Brand Colors */
+  --color-primary: #FF8C00;
+  --color-primary-light: #FFB84D;
+  --color-primary-dark: #CC6600;
+  --color-secondary: #666666;
+  --color-accent: #DAA520;
+
+  /* Base Colors (Light Mode) */
+  --color-white: #FFFFFF;
+  --color-off-white: #F8F8F8;
+  --color-border: #EEEEEE;
+  --color-text: #1F1F1F;
+
+  /* FIXED: OPAQUE Card backgrounds (no transparency) */
+  --color-card-bg: #FFFFFF;
+  --color-card-bg-alt: #FFF8F0;
+
+  /* Gradients */
+  --bg-gradient-primary: linear-gradient(135deg, #FF9966 0%, #FF5E62 50%, #DAA520 100%);
+  --bg-gradient-text: linear-gradient(to right, #FF8C00, #FF5E62, #DAA520);
+  --bg-gradient-card: linear-gradient(135deg, #FFFFFF 0%, #FFF8F0 100%);
+
+  /* Page Background Gradient (Light) */
+  --bg-page-gradient: linear-gradient(180deg, #FFFFFF 0%, #FFFBF2 100%);
+
+  /* Shadows */
+  --shadow-btn-primary: 0 4px 12px rgba(255, 140, 0, 0.3);
+  --shadow-btn-hover: 0 6px 16px rgba(255, 140, 0, 0.4);
+  --shadow-card: 0 4px 6px rgba(0, 0, 0, 0.07);
+  --shadow-card-hover: 0 8px 16px rgba(255, 140, 0, 0.15);
+  --shadow-glass: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+}
+
+:root.dark {
+  color-scheme: dark;
+  /* Brand Colors */
+  --color-primary: #FF8C00;
+  --color-primary-light: #FFB84D;
+  --color-primary-dark: #CC6600;
+  --color-secondary: #A1A1AA;
+  --color-accent: #DAA520;
+
+  /* Base Colors (Dark Mode) */
+  --color-white: #0f0f0f;
+  --color-off-white: #18181b;
+  --color-border: #3f3f46;
+  --color-text: #f4f4f5;
+
+  /* FIXED: OPAQUE Card backgrounds for dark mode (NO TRANSPARENCY) */
+  --color-card-bg: #27272a;
+  --color-card-bg-alt: #323238;
+
+  /* FIXED: Opaque gradient for dark mode */
+  --bg-gradient-primary: linear-gradient(135deg, #FF9966 0%, #FF5E62 50%, #DAA520 100%);
+  --bg-gradient-text: linear-gradient(to right, #FF8C00, #FF5E62, #DAA520);
+  --bg-gradient-card: linear-gradient(135deg, #27272a 0%, #323238 100%);
+
+  /* Page Background Gradient (Dark) */
+  --bg-page-gradient: linear-gradient(180deg, #0A0A0A 0%, #141414 100%);
+
+  /* Shadows (Dark Mode) */
+  --shadow-btn-primary: 0 4px 12px rgba(255, 140, 0, 0.2);
+  --shadow-btn-hover: 0 6px 16px rgba(255, 140, 0, 0.3);
+  --shadow-card: 0 4px 6px rgba(0, 0, 0, 0.3);
+  --shadow-card-hover: 0 8px 16px rgba(255, 140, 0, 0.4);
+  --shadow-glass: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+}
+
+@theme {
+  --color-primary: var(--color-primary);
+  --color-primary-light: var(--color-primary-light);
+  --color-primary-dark: var(--color-primary-dark);
+
+  --color-secondary: var(--color-secondary);
+  --color-accent: var(--color-accent);
+
+  --color-white: var(--color-white);
+  --color-off-white: var(--color-off-white);
+  --color-border: var(--color-border);
+  --color-text: var(--color-text);
+  --color-card-bg: var(--color-card-bg);
+  --color-card-bg-alt: var(--color-card-bg-alt);
+
+  --font-brand: 'FARRAY', 'Inter', sans-serif;
+  --font-primary: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --background-image-gradient-primary: var(--bg-gradient-primary);
+  --background-image-gradient-text: var(--bg-gradient-text);
+  --background-image-gradient-card: var(--bg-gradient-card);
+  --background-image-page: var(--bg-page-gradient);
+
+  --shadow-btn-primary: var(--shadow-btn-primary);
+  --shadow-btn-hover: var(--shadow-btn-hover);
+  --shadow-card: var(--shadow-card);
+  --shadow-card-hover: var(--shadow-card-hover);
+  --shadow-glass: var(--shadow-glass);
+}
+
+@font-face {
+  font-family: 'FARRAY';
+  src: url('/fonts/FARRAY.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Scroll Stack Card - GPU Accelerated */
+.scroll-stack-card {
+  contain: layout style paint;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  -webkit-font-smoothing: antialiased;
+  background: var(--bg-gradient-card);
+}
+
+.scroll-stack-card a,
+.scroll-stack-card button {
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@layer base {
+  body {
+    @apply text-text font-primary antialiased;
+    background-image: var(--bg-page-gradient);
+    background-attachment: fixed;
+    /* Optional: Nice parallax effect */
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply mb-4 leading-tight;
+  }
+
+  h1,
+  h2 {
+    @apply font-brand font-bold tracking-tight;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center justify-center px-7 py-3 rounded-lg bg-gradient-primary text-white font-brand font-semibold text-base shadow-btn-primary transition-all duration-300 hover:shadow-btn-hover hover:-translate-y-0.5 active:translate-y-0 active:shadow-sm cursor-pointer;
+    background: var(--background-image-gradient-primary);
+    background-size: 200% 200%;
+    animation: gradient-flow 3s ease infinite;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center px-7 py-3 rounded-lg border-2 border-border bg-off-white text-text font-primary font-semibold text-base transition-all duration-300 hover:bg-border hover:border-primary hover:text-primary cursor-pointer;
+  }
+
+  .animate-gradient {
+    background-size: 200% auto;
+    animation: gradient-flow 3s linear infinite;
+  }
+
+  .bg-card-gradient {
+    background: var(--bg-gradient-card);
+  }
+}
+
+/* Custom Scrollbar for Firefox */
+body {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-primary) transparent;
+}
+
+/* Custom Scrollbar for WebKit (Chrome, Safari, Edge) */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--color-primary-light);
+  border-radius: 20px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--color-primary);
+}
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+}
+
+@keyframes gradient-flow {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes floatShape {
+  0% {
+    transform: translate(0, 0);
+  }
+
+  100% {
+    transform: translate(20px, 40px);
+  }
+}
+
+.hero-shape {
+  position: absolute;
+  border-radius: 50%;
+  z-index: -1;
+  background: var(--background-image-gradient-primary);
+}
